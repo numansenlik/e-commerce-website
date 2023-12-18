@@ -1,8 +1,69 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"
+import { getProducts } from "../../redux/productSlice";
+import { AppDispatch, RootState } from "../../redux/store";
+import Loading from "../Loading";
+import Product from "./Product";
+import ReactPaginate from "react-paginate";
 
+interface IPageChange {
+    selected: number;
+}
 
 const Products = () => {
+
+    const dispatch = useDispatch<AppDispatch>();
+    const { products, productsStatus } = useSelector((state: RootState) => state.products);
+    console.log(products, productsStatus);
+
+    const [itemOffset, setItemOffset] = useState<number>(0);
+
+    const itemsPerPage = 6;
+    const endOffset = itemOffset + itemsPerPage;
+    // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    const currentItems = products.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(products.length / itemsPerPage);
+
+    const handlePageClick = (event: IPageChange) => {
+        console.log(event);
+
+        const newOffset = (event.selected * itemsPerPage) % products.length;
+        console.log(
+            `User requested page number ${event.selected}, which is offset ${newOffset}`
+        );
+        setItemOffset(newOffset);
+    };
+
+
+    useEffect(() => {
+        dispatch(getProducts())
+    }, [dispatch])
+
     return (
-        <div>Products</div>
+        <div>
+            {
+                productsStatus == "LOADING" ? <Loading /> :
+                    <>
+                        <div className="flex flex-wrap ">
+                            {
+                                currentItems?.map((product) => (
+                                    <Product key={product.id} product={product} />
+                                ))
+                            }
+                        </div>
+                        <ReactPaginate
+                            className="paginate"
+                            breakLabel="..."
+                            nextLabel=">"
+                            onPageChange={handlePageClick}
+                            pageRangeDisplayed={5}
+                            pageCount={pageCount}
+                            previousLabel="<"
+                            renderOnZeroPageCount={null}
+                        />
+                    </>
+            }
+        </div>
     )
 }
 export default Products

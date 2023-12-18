@@ -14,7 +14,7 @@ function Category() {
     }, [dispatch]);
 
     return (
-        <div className="w-1/6 bg-gray-100 p-4">
+        <div className="w-1/6 bg-gray-100 p-4 max-h-screen">
             <div className="border-b pb-2 text-xl font-bold px-2">Category</div>
             {categories?.map((category: string, index: number) => (
                 <div className="text-lg cursor-pointer hover:bg-gray-200 p-2 first-letter:uppercase" key={index}>{category}</div>

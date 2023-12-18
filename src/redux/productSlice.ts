@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { STATUS, Status } from "../utils/status";
 
-interface IProduct {
+export interface IProduct {
     id: number;
     title: string;
     price: string;

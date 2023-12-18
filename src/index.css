@@ -6,3 +6,30 @@
 body {
     font-family: 'Nunito', sans-serif;
 }
+
+.paginate {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.paginate li {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:first-child,
+    &:last-child {
+        border: none;
+    }
+
+    &.selected {
+        background: rgba(131, 131, 131, 0.533);
+        color: #fff;
+        font-weight: bold;
+    }
+}
