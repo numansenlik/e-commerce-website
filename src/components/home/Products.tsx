@@ -11,11 +11,12 @@ interface IPageChange {
 }
 
 interface IProductsProps {
-    category: string
+    category: string,
+    sort: string
 }
 
 
-const Products: React.FC<IProductsProps> = ({ category }) => {
+const Products: React.FC<IProductsProps> = ({ category, sort }) => {
 
     const dispatch = useDispatch<AppDispatch>();
     const { products, productsStatus } = useSelector((state: RootState) => state.products);
@@ -25,7 +26,10 @@ const Products: React.FC<IProductsProps> = ({ category }) => {
 
     const itemsPerPage = 6;
     const endOffset = itemOffset + itemsPerPage;
-    const currentItems = products.slice(itemOffset, endOffset);
+    const sortProducts = [...products].sort((a, b) => {
+        return sort === "inc" ? a.price - b.price : sort === "dec" ? b.price - a.price : 0;
+      });
+    const currentItems = sortProducts.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(products.length / itemsPerPage);
 
     const handlePageClick = (event: IPageChange) => {

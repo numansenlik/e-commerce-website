@@ -4,7 +4,7 @@ import { STATUS, Status } from "../utils/status";
 export interface IProduct {
     id: number;
     title: string;
-    price: string;
+    price: number;
     category: string;
     description: string;
     image: string;
