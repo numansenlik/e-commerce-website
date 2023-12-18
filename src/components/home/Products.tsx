@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { getProducts } from "../../redux/productSlice";
+import { getCategoryProducts, getProducts } from "../../redux/productSlice";
 import { AppDispatch, RootState } from "../../redux/store";
 import Loading from "../Loading";
 import Product from "./Product";
@@ -10,7 +10,12 @@ interface IPageChange {
     selected: number;
 }
 
-const Products = () => {
+interface IProductsProps {
+    category: string
+}
+
+
+const Products: React.FC<IProductsProps> = ({ category }) => {
 
     const dispatch = useDispatch<AppDispatch>();
     const { products, productsStatus } = useSelector((state: RootState) => state.products);
@@ -20,13 +25,10 @@ const Products = () => {
 
     const itemsPerPage = 6;
     const endOffset = itemOffset + itemsPerPage;
-    // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     const currentItems = products.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(products.length / itemsPerPage);
 
     const handlePageClick = (event: IPageChange) => {
-        console.log(event);
-
         const newOffset = (event.selected * itemsPerPage) % products.length;
         console.log(
             `User requested page number ${event.selected}, which is offset ${newOffset}`
@@ -36,8 +38,12 @@ const Products = () => {
 
 
     useEffect(() => {
-        dispatch(getProducts())
-    }, [dispatch])
+        if (category) {
+            dispatch(getCategoryProducts(category))
+        } else {
+            dispatch(getProducts())
+        }
+    }, [dispatch, category])
 
     return (
         <div>

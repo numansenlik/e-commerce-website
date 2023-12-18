@@ -14,8 +14,8 @@ function Home() {
             <SliderComp />
             <Sorting />
             <div className="flex">
-                <Category  />
-                <Products />
+                <Category setCategory={setCategory} />
+                <Products category={category} />
             </div>
         </div>
     )
