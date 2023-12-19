@@ -1,19 +1,10 @@
+import { IProduct } from "../../redux/productSlice"
 
 
 interface IDetailCompProps {
-    productDetail: {
-        id: number;
-        title: string;
-        price: number;
-        category: string;
-        description: string;
-        image: string;
-        rating: {
-            count: number;
-            rate: number;
-        }
-    };
+    productDetail: IProduct;
 }
+
 
 const DetailComp: React.FC<IDetailCompProps> = ({ productDetail }) => {
     return (

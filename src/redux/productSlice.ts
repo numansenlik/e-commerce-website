@@ -15,18 +15,19 @@ export interface IProduct {
 }
 
 interface IProducts {
-    products: IProduct[],
-    productsStatus: Status,
-    productDetail: IProduct[],
-    productDetailStatus: Status
+    products: IProduct[];
+    productsStatus: Status;
+    productDetail: IProduct; 
+    productDetailStatus: Status;
 }
 
 const initialState: IProducts = {
     products: [],
     productsStatus: STATUS.IDLE,
-    productDetail: [],
+    productDetail: {} as IProduct, 
     productDetailStatus: STATUS.IDLE
 }
+
 
 export const getProducts = createAsyncThunk('getproducts', async () => {
     const response = await fetch('https://fakestoreapi.com/products')
@@ -65,10 +66,11 @@ const productSlice = createSlice({
             .addCase(getDetailProduct.pending, (state) => {
                 state.productDetailStatus = STATUS.LOADING
             })
-            .addCase(getDetailProduct.fulfilled, (state, action: PayloadAction<IProduct[]>) => {
+            .addCase(getDetailProduct.fulfilled, (state, action: PayloadAction<IProduct>) => {
                 state.productDetailStatus = STATUS.SUCCESS;
-                state.productDetail = action.payload
+                state.productDetail = action.payload; 
             })
+                     
             .addCase(getDetailProduct.rejected, (state) => {
                 state.productDetailStatus = STATUS.FAIL
             })

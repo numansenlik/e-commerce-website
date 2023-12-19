@@ -12,7 +12,7 @@ function Detail() {
     console.log(id);
     const dispatch = useDispatch<AppDispatch>();
     const { productDetail, productDetailStatus } = useSelector((state: RootState) => state.products);
-    console.log(productDetail, productDetailStatus);
+    console.log(productDetail);
 
     useEffect(() => {
         if (!id) {
