@@ -2,12 +2,16 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { STATUS, Status } from "../utils/status";
 
 export interface IProduct {
-    id: number;
-    title: string;
-    price: number;
-    category: string;
-    description: string;
-    image: string;
+        id: number;
+        title: string;
+        price: number;
+        category: string;
+        description: string;
+        image: string;
+        rating: {
+            count: number;
+            rate: number;
+        }
 }
 
 interface IProducts {
@@ -36,7 +40,7 @@ export const getCategoryProducts = createAsyncThunk('getcategoryproducts', async
     return data
 })
 
-export const getDetailProducts = createAsyncThunk('getdetailproducts', async (id: number) => {
+export const getDetailProduct = createAsyncThunk('getdetailproduct', async (id: string) => {
     const response = await fetch(`https://fakestoreapi.com/products/${id}`)
     const data = await response.json()
     return data
@@ -58,14 +62,14 @@ const productSlice = createSlice({
             .addCase(getProducts.rejected, (state) => {
                 state.productsStatus = STATUS.FAIL
             })
-            .addCase(getDetailProducts.pending, (state) => {
+            .addCase(getDetailProduct.pending, (state) => {
                 state.productDetailStatus = STATUS.LOADING
             })
-            .addCase(getDetailProducts.fulfilled, (state, action: PayloadAction<IProduct[]>) => {
+            .addCase(getDetailProduct.fulfilled, (state, action: PayloadAction<IProduct[]>) => {
                 state.productDetailStatus = STATUS.SUCCESS;
                 state.productDetail = action.payload
             })
-            .addCase(getDetailProducts.rejected, (state) => {
+            .addCase(getDetailProduct.rejected, (state) => {
                 state.productDetailStatus = STATUS.FAIL
             })
             .addCase(getCategoryProducts.pending, (state) => {

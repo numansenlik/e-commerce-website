@@ -10,7 +10,7 @@ body {
 .paginate {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .paginate li {
@@ -22,7 +22,11 @@ body {
     align-items: center;
     justify-content: center;
 
-    &:first-child,
+    &:first-child {
+        border: none;
+    }
+
+
     &:last-child {
         border: none;
     }
