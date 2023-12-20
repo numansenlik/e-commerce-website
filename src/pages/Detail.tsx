@@ -9,10 +9,8 @@ import Loading from "../components/Loading";
 
 function Detail() {
     const { id } = useParams<{ id: string }>();
-    console.log(id);
     const dispatch = useDispatch<AppDispatch>();
     const { productDetail, productDetailStatus } = useSelector((state: RootState) => state.products);
-    console.log(productDetail);
 
     useEffect(() => {
         if (!id) {
