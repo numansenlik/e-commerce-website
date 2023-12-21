@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { IProduct } from "../../redux/productSlice"
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cartSlice";
 
 
 interface IDetailCompProps {
@@ -8,14 +10,16 @@ interface IDetailCompProps {
 
 
 const DetailComp: React.FC<IDetailCompProps> = ({ productDetail }) => {
-    const [quantity, setQuantity] = useState<number>(0);
+    const [quantity, setQuantity] = useState<number>(1);
+    const dispatch = useDispatch();
+
 
     const addBasket = () => {
-        
+        dispatch(addToCart({id: productDetail?.id , title: productDetail?.title , price: productDetail?.price , image: productDetail?.image  , quantity:quantity}));
     }
 
     const decrement = () => {
-        setQuantity(prev => prev >= 1 ? prev - 1 : prev)
+        setQuantity(prev => prev > 1 ? prev - 1 : prev)
     }
 
     const increment = () => {

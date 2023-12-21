@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface ICartItem {
+export interface ICartItem {
     id: number;
     title: string;
     price: number;
+    image: string;
     quantity: number;
-    totalPrice: number;
 }
 
 interface ICartSlice {
@@ -70,7 +70,9 @@ const cartSlice = createSlice({
         },
         getCartTotal: (state) => {
             state.totalAmount = state.carts.reduce((cartTotal, cartItem) => {
-                return cartTotal += cartItem.totalPrice
+                cartTotal += cartItem.price * cartItem.quantity
+                cartTotal = parseFloat(cartTotal.toFixed(2));
+                return cartTotal 
             }, 0)
             state.itemCount = state.carts.length
         }
