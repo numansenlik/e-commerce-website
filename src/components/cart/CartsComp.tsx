@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { ICartItem, removeFromCart } from "../../redux/cartSlice";
 import { useDispatch } from "react-redux";
 

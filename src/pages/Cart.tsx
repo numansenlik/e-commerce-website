@@ -1,13 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { RootState } from "../redux/store";
 import { useEffect } from "react";
 import { getCartTotal } from "../redux/cartSlice";
 import CartsComp from "../components/cart/CartsComp";
 
 function Cart() {
-
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { carts, totalAmount, itemCount } = useSelector((state: RootState) => state.carts);
   console.log(carts, "/", totalAmount, "/", itemCount);
@@ -15,7 +12,7 @@ function Cart() {
 
   useEffect(() => {
     dispatch(getCartTotal())
-  }, [dispatch])
+  }, [dispatch, carts])
 
   return (
     <div>
