@@ -1,18 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import { IProduct } from "../../redux/productSlice";
 
 interface IProductProps {
-    product: {
-        id: number;
-        title: string;
-        price: number;
-        category: string;
-        description: string;
-        image: string;
-        rating: {
-            count: number;
-            rate: number;
-        }
-    };
+    product: IProduct
 }
 
 const Product: React.FC<IProductProps> = ({ product }) => {

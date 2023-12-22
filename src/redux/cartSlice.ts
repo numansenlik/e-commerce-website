@@ -75,9 +75,26 @@ const cartSlice = createSlice({
                 return cartTotal 
             }, 0)
             state.itemCount = state.carts.length
-        }
+        },
+        decQuantity: (state, action: PayloadAction<number>) => {
+            const item = state.carts.find(item => item.id === action.payload);
+
+            if (item && item.quantity > 1) {
+                {item.quantity > 1 ? item.quantity -= 1 : item.quantity}
+                storeInLocalStroge(state.carts);
+            }
+        },
+        incQuantity: (state, action: PayloadAction<number>) => {
+            const item = state.carts.find(item => item.id === action.payload);
+
+            if (item && item.quantity > 0) {
+                item.quantity += 1;
+                storeInLocalStroge(state.carts);
+            }
+        },
+        
     }
 })
 
-export const { addToCart, removeFromCart, clearCart, getCartTotal } = cartSlice.actions
+export const { addToCart, removeFromCart, clearCart, getCartTotal, decQuantity, incQuantity } = cartSlice.actions
 export default cartSlice.reducer;
