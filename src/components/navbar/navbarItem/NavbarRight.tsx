@@ -11,13 +11,11 @@ import { getProducts } from '../../../redux/productSlice';
 function NavbarRight() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [search, setSearch] = useState<string>();
+    const [search, setSearch] = useState<string>("");
     console.log(search);
 
     const carts = useSelector((state: RootState) => state.carts.carts);
-    const { products, productsStatus } = useSelector((state: RootState) => state.products);
-    console.log(products, productsStatus, "bunlar");
-
+    const { products } = useSelector((state: RootState) => state.products);
 
     useEffect(() => {
         dispatch(getCartTotal(), getProducts());
@@ -31,8 +29,8 @@ function NavbarRight() {
                     <BiSearch size={28} />
                 </div>
                 <div className='top-20 px-3 absolute z-50 w-[250px] '>
-                    {(search && products) && products.filter((item) => item.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())).map((item) => (
-                        <div className='flex items-center mb-1 bg-gray-300 border-solid  border-gray-600 rounded-3xl cursor-pointer'
+                    {(search && products) && products.filter((item) => item.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())).map((item,index) => (
+                        <div key={index} className='flex items-center mb-1 bg-gray-300 border-solid  border-gray-600 rounded-3xl cursor-pointer'
                             onClick={() => {
                                 navigate(`/products/${item.id}`)
                                 setSearch('');
