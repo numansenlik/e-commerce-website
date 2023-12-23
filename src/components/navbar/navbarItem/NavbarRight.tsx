@@ -1,5 +1,4 @@
 import { BiSearch } from 'react-icons/bi';
-import { AiOutlineHeart } from 'react-icons/ai';
 import { SlBasket } from 'react-icons/sl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -23,7 +22,6 @@ function NavbarRight() {
                 <input type="text" className='bg-gray-200 outline-none' placeholder="Search.." />
                 <BiSearch size={28} />
             </div>
-            <AiOutlineHeart />
             <div onClick={() => navigate("cart")} className="relative cursor-pointer">
                 <div className='absolute -top-3 rounded-full text-white bg-red-500 -right-3 w-5 h-5 flex items-center justify-center '>{carts?.length}</div>
                 <SlBasket size={28} />
