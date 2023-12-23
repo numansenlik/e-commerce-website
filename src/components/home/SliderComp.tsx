@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Slider from "react-slick";
 import { RootState } from "../../redux/store";
 import Loading from "../Loading";
