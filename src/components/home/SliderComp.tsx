@@ -1,9 +1,8 @@
 import Slider from "react-slick";
 
 function SliderComp() {
-
+    
     const settings = {
-        // dots: true,
         infinite: true,
         speed: 500,
         autoplay: true,
