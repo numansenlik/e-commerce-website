@@ -12,7 +12,6 @@ function NavbarRight() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [search, setSearch] = useState<string>("");
-    console.log(search);
 
     const carts = useSelector((state: RootState) => state.carts.carts);
     const { products } = useSelector((state: RootState) => state.products);

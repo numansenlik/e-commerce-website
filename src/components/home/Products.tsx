@@ -20,7 +20,6 @@ const Products: React.FC<IProductsProps> = ({ category, sort }) => {
 
     const dispatch = useDispatch<AppDispatch>();
     const { products, productsStatus } = useSelector((state: RootState) => state.products);
-    console.log(products, productsStatus);
 
     const [itemOffset, setItemOffset] = useState<number>(0);
 
@@ -34,9 +33,7 @@ const Products: React.FC<IProductsProps> = ({ category, sort }) => {
 
     const handlePageClick = (event: IPageChange) => {
         const newOffset = (event.selected * itemsPerPage) % products.length;
-        console.log(
-            `User requested page number ${event.selected}, which is offset ${newOffset}`
-        );
+
         setItemOffset(newOffset);
     };
 

@@ -8,7 +8,7 @@ function Home() {
 
     const [sort, setSort] = useState<string>('');
     const [category, setCategory] = useState<string>('');
-
+    
     return (
         <div>
             <SliderComp />
